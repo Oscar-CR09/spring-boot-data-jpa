@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 public class PageRender<T> {
+	
 	private String url;
 	private Page<T>page;
 	
@@ -39,7 +40,7 @@ public class PageRender<T> {
 				 desde = 1;
 				 hasta = numElementosPorPagina;
 				 
-			}else if(paginaActual >= totalPaginas - numElementosPorPagina){
+			}else if(paginaActual >= totalPaginas - numElementosPorPagina/2){
 				desde = totalPaginas - numElementosPorPagina + 1;
 				hasta = numElementosPorPagina;
 				
@@ -59,57 +60,21 @@ public class PageRender<T> {
 	}
 
 
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-
-
 	public Page<T> getPage() {
 		return page;
 	}
-
-
-
-	public void setPage(Page<T> page) {
-		this.page = page;
-	}
-
 
 
 	public int getTotalPaginas() {
 		return totalPaginas;
 	}
 
-
-
-	public void setTotalPaginas(int totalPaginas) {
-		this.totalPaginas = totalPaginas;
-	}
-
-
-
 	public int getNumElementosPorPagina() {
 		return numElementosPorPagina;
 	}
 
-
-
-	public void setNumElementosPorPagina(int numElementosPorPagina) {
-		this.numElementosPorPagina = numElementosPorPagina;
-	}
-
-
-
 	public int getPaginaActual() {
 		return paginaActual;
-	}
-
-
-
-	public void setPaginaActual(int paginaActual) {
-		this.paginaActual = paginaActual;
 	}
 
 
@@ -120,10 +85,6 @@ public class PageRender<T> {
 
 
 
-	public void setPaginas(List<PageItem> paginas) {
-		this.paginas = paginas;
-	}
-	
 	public boolean isFirst() {
 		return page.isFirst();
 	}
@@ -135,4 +96,8 @@ public class PageRender<T> {
 	public boolean isHasNext() {
 		return page.hasContent();
 	}
+	public boolean isHasPrevious() {
+		return page.hasPrevious();
+	}
+
 }
