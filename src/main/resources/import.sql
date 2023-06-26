@@ -18,3 +18,8 @@ INSERT INTO productos(nombre,precio,create_at) VALUES('Apple iPod shuffle',2990,
 INSERT INTO productos(nombre,precio,create_at) VALUES('Sonic Notebook Z110',3490,NOW());
 INSERT INTO productos(nombre,precio,create_at) VALUES('Hewlett pack',56990,NOW());
 INSERT INTO productos(nombre,precio,create_at) VALUES('Mica Comoda 5 cajones',59990,NOW());
+
+INSERT INTO facturas(descripcion,observacion, cliente_id, create_at) VALUES('Facturas de oficinas',null,1,NOW());
+INSERT INTO facturas_items(cantidad,factura_id,producto_id) VALUES(1,1,1);
+INSERT INTO facturas_items(cantidad,factura_id,producto_id) VALUES(2,1,4);
+INSERT INTO facturas_items(cantidad,factura_id,producto_id) VALUES(1,1,5);
