@@ -12,3 +12,9 @@ INSERT INTO clientes(id, nombre,apellido,email,create_at,foto) VALUES(11,'juan',
 INSERT INTO clientes(id, nombre,apellido,email,create_at,foto) VALUES(12,'carlos','liz','cl@gmail.com','2023-05-01','');
 INSERT INTO clientes(id, nombre,apellido,email,create_at,foto) VALUES(13,'brian','has','bh@gmail.com','2023-05-01','');
 
+INSERT INTO productos(nombre,precio,create_at) VALUES('Panasonic Pantalla LCD',9990,NOW());
+INSERT INTO productos(nombre,precio,create_at) VALUES('Sony Camara digital',3125,NOW());
+INSERT INTO productos(nombre,precio,create_at) VALUES('Apple iPod shuffle',2990,NOW());
+INSERT INTO productos(nombre,precio,create_at) VALUES('Sonic Notebook Z110',3490,NOW());
+INSERT INTO productos(nombre,precio,create_at) VALUES('Hewlett pack',56990,NOW());
+INSERT INTO productos(nombre,precio,create_at) VALUES('Mica Comoda 5 cajones',59990,NOW());
