@@ -39,7 +39,7 @@ public class FacturaController {
 		factura.setCliente(cliente);
 		
 		model.put("factura", factura);
-		model.put("titulo", "crear factura");
+		model.put("titulo", "Crear Factura");
 		
 		
 		
