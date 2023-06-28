@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.examples.springboot.app.models.entity.Cliente;
+import com.examples.springboot.app.models.entity.Producto;
 
 public interface IClienteService {
 
@@ -18,5 +19,8 @@ public interface IClienteService {
 	public Cliente finOne(Long id);
 	
 	public void delete(Long id);
+	
+	public List<Producto> finByNombre(String term);
+	
 	
 }
