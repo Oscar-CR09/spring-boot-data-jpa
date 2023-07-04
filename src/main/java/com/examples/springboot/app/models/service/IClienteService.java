@@ -31,4 +31,6 @@ public interface IClienteService {
 	
 	public void deleteFactura(Long id);
 	
+	public Factura fetchFacturaByIdWithClienteWhithItemFacturaWithProducto(Long id);
+	
 }
