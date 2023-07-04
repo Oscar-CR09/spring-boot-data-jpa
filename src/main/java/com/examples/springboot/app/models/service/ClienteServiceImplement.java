@@ -41,7 +41,7 @@ public class ClienteServiceImplement implements IClienteService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public Cliente finOne(Long id) {
+	public Cliente findOne(Long id) {
 		
 		return clienteDao.findById(id).orElse(null);
 	}
@@ -62,9 +62,9 @@ public class ClienteServiceImplement implements IClienteService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Producto> finByNombre(String term) {
+	public List<Producto> findByNombre(String term) {
 		
-		return productoDao.findByNombreLikeIgnoreCase("%"+term+"%");
+		return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
 	}
 
 	@Override
@@ -76,11 +76,18 @@ public class ClienteServiceImplement implements IClienteService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Producto finProductoById(Long id) {
+	public Producto findProductoById(Long id) {
 		
 		return productoDao.findById(id).orElse(null);
 		
 		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Factura findFacturaById(Long id) {
+		
+		return facturaDao.findById(id).orElse(null);
 	}
 	
 

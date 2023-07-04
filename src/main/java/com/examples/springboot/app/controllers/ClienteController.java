@@ -58,7 +58,7 @@ public class ClienteController {
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
-		Cliente cliente = clienteService.finOne(id);
+		Cliente cliente = clienteService.findOne(id);
 		if (cliente == null) {
 			flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
 			return "redirect:/listar";
@@ -100,7 +100,7 @@ public class ClienteController {
 		Cliente cliente = null;
 
 		if (id > 0) {
-			cliente = clienteService.finOne(id);
+			cliente = clienteService.findOne(id);
 			if (cliente == null) {
 				flash.addFlashAttribute("error", "El ID del cliente no existe en la base de datos");
 				return "redirect:/listar";
@@ -156,7 +156,7 @@ public class ClienteController {
 	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 
 		if (id > 0) {
-			Cliente cliente = clienteService.finOne(id);
+			Cliente cliente = clienteService.findOne(id);
 			clienteService.delete(id);
 			flash.addFlashAttribute("success", "Cliente eliminado con éxito");
 

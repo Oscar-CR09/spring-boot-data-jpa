@@ -17,14 +17,15 @@ public interface IClienteService {
 	
 	public void save(Cliente cliente);
 	
-	public Cliente finOne(Long id);
+	public Cliente findOne(Long id);
 	
 	public void delete(Long id);
 	
-	public List<Producto> finByNombre(String term);
+	public List<Producto> findByNombre(String term);
 	
 	public void saveFactura(Factura factura);
 	
-	public Producto finProductoById(Long id);
+	public Producto findProductoById(Long id);
 	
+	public Factura findFacturaById(Long id);
 }
