@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Configuration
 @EnableWebSecurity
@@ -37,10 +40,20 @@ public class SpringSecurityConfig {
         return manager;
     }
     
+    @Controller
+    public class MyController {
+
+        @GetMapping("/login")
+        public String login() {
+            return "login";
+        }
+
+    }
+    
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((authz) -> {
+            .authorizeHttpRequests((authz) ->  {
                 try {
                     authz.requestMatchers("/", "/css/**", "/js/**", "/images/**", "/listar").permitAll()
                         .requestMatchers("/uploads/**").hasRole("USER")
@@ -48,11 +61,14 @@ public class SpringSecurityConfig {
                         .requestMatchers("/factura/**").hasRole("ADMIN")
                         .requestMatchers("/form/**").hasRole("ADMIN")
                         .requestMatchers("/eliminar/**").hasRole("ADMIN")
-                        .anyRequest().authenticated();
+                        .anyRequest().authenticated()
+                        .anyRequest().denyAll();
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
-            });
+            }
+            	
+            		);
  
         return http.build();
             
