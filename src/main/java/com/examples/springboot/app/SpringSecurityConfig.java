@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +40,7 @@ public class SpringSecurityConfig {
 				.requestMatchers("/", "/css/**", "/js/**", "/images/**", "/listar").permitAll()
 						.requestMatchers("/uploads/**").hasRole("USER").requestMatchers("/ver/**").hasRole("USER")
 						.requestMatchers("/factura/**").hasRole("ADMIN").requestMatchers("/form/**").hasRole("ADMIN")
-						.requestMatchers("/eliminar/**").hasRole("ADMIN").requestMatchers("/login").authenticated()
+						.requestMatchers("/eliminar/**").hasRole("ADMIN").requestMatchers("/").authenticated()
 						.anyRequest().denyAll()
 					
 						        
