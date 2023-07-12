@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -44,8 +46,8 @@ import jakarta.validation.Valid;
 @SessionAttributes("cliente")
 public class ClienteController {
 	
-	//protected final Log logger = LogFactory.getLog(this.getClass());
-
+	protected final Log logger = LogFactory.getLog(this.getClass());
+	
 	@Autowired
 	private IClienteService clienteService;
 
@@ -90,34 +92,34 @@ public class ClienteController {
 			Authentication authentication,
 			HttpServletRequest request) {
 		if (authentication != null) {
-			//Logger.info("Hola usuario autenticado, tu username es: ".concat(authentication.getName()));
+			logger.info("Hola usuario autenticado, tu username es: ".concat(authentication.getName()));
 		}
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		if (auth != null) {
-			//Logger.info("Utilizando la forma estatica de SecurityContextHolder.getContext().getAuthentication() , username: ".concat(authentication.getName()));
+			logger.info("Utilizando la forma estatica de SecurityContextHolder.getContext().getAuthentication() , username: ".concat(authentication.getName()));
 		}
 		
 		
 		if (hasRole("ROLE_ADMIN")) {
-			//logger.info("Hola".concat(auth.getName()).concat(" tienes acceso!"));
+			logger.info("Hola".concat(auth.getName()).concat(" tienes acceso!"));
 		}else {
-			//logger.info("Hola".concat(auth.getName()).concat(" No tienes acceso!"));
+			logger.info("Hola".concat(auth.getName()).concat(" No tienes acceso!"));
 		}
 		
 		SecurityContextHolderAwareRequestWrapper securityContext = new SecurityContextHolderAwareRequestWrapper(request, ""); 
 		
 		if (securityContext.isUserInRole("ROLE_ADMIN")) {
-			//logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
+			logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
 		}else {
-			//logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
+			logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
 		}
 		
 		if (request.isUserInRole("ROLE_ADMIN")) {
-			//logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
+			logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
 		}else {
-			//logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
+			logger.info("Forma usando SecurityContextHolderAwareRequestWrapper ".concat(auth.getName()).concat(" tienes acceso!"));
 		}
 		
 		Pageable pageRequest = PageRequest.of(page, 5);

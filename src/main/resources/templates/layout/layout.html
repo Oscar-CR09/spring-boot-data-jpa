@@ -36,11 +36,11 @@
 						<li sec:authorize="isAuthenticated()" class="dropdown show">
 							<a class="btn btn-outline-primary dropdown-toggle" href="#"
 								role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> <span sec:authentication="name"></span>  </a>
+								aria-haspopup="true" aria-expanded="false"> <span sec:authentication="name"></span></a>
 
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 							
-								<form id="logoutForm" th:action="@{/logout} " method="post">
+								<form id="logoutForm" th:action="@{/logout}" method="post">
 									<button class="dropdown-item"
 										onclick="document.getElementById('logoutForm').submit();"
 										type="submit">Sing out</button>

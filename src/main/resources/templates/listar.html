@@ -18,7 +18,7 @@
 					<thead>
 					</thead>
 					<tr>
-						<th sec:authorize="hasRole('ROLE_USE')">id</th>
+						<th sec:authorize="hasRole('ROLE_USER')">id</th>
 						<th>nombre</th>
 						<th>apellido</th>
 						<th>email</th>
@@ -29,7 +29,7 @@
 					</tr>
 					<tbody>
 						<tr th:each="cliente: ${clientes}">
-							<td sec:authorize="hasRole('ROLE_USE')"> <a class="btn btn-primary btn-xs" th:href="@{/ver/} + ${cliente.id}" th:text="${cliente.id}"></a></td>
+							<td sec:authorize="hasRole('ROLE_USER')"> <a class="btn btn-primary btn-xs" th:href="@{/ver/} + ${cliente.id}" th:text="${cliente.id}"></a></td>
 							<td th:text="${cliente.nombre}"></td>
 							<td th:text="${cliente.apellido}"></td>
 							<td th:text="${cliente.email}"></td>

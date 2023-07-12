@@ -15,18 +15,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 //import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
-//import com.examples.springboot.app.auth.handler.LoginSuccesHandler;
+import com.examples.springboot.app.auth.handler.LoginSuccesHandler;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SpringSecurityConfig {
 
-	@Bean
-	public static BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	@Bean
 	public UserDetailsService userDetailsService() throws Exception {
@@ -52,17 +51,30 @@ public class SpringSecurityConfig {
 	                .anyRequest().authenticated()
 	            )
 	            .formLogin(formLogin -> formLogin
+	            	.successHandler(successHandler)
 	                .loginPage("/login")
+	                
 	                .permitAll()
 	            )
-	            .rememberMe(Customizer.withDefaults());
+	            
+	            .exceptionHandling((exceptionHandling) -> exceptionHandling
+						.accessDeniedPage("/error_403"))
+	            
+	            .logout((logout) -> logout.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
+	            //.logout((logout) -> logout.logoutUrl("/my/success/endpoint"))
 
+					
+	            .rememberMe(Customizer.withDefaults());
+	        ;
+	        
 	        return http.build();
 	    }
 	}
 
-	//@Autowired
-	// private LoginSuccesHandler successHandler;
+	@Autowired
+	private LoginSuccesHandler successHandler;
+	
+
 /*
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
