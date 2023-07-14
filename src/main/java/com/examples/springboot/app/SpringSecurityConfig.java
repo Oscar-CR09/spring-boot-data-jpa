@@ -1,9 +1,7 @@
 package com.examples.springboot.app;
 
-import javax.sql.DataSource;
-
+//import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -11,35 +9,32 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 import com.examples.springboot.app.auth.handler.LoginSuccesHandler;
+import com.examples.springboot.app.models.service.JpaUserDetailsService;
 
-@Configuration
+
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@Configuration
 public class SpringSecurityConfig {
 
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    private DataSource dataSource;
+	private LoginSuccesHandler successHandler;
 
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+    //@Autowired
+   // private DataSource dataSource;
+
     @Autowired
-	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception
-	{
-		build.jdbcAuthentication()
-		.dataSource(dataSource)
-		.passwordEncoder(passwordEncoder)
-		.usersByUsernameQuery("select usuario, passoword, enabled from usuarios where usuario=?")
-		.authoritiesByUsernameQuery("select u.usuario, a.authority from authorities a inner join usuarios u on (a.user_id=u.id) where u.usuario=?");
-		
-	}
+    private JpaUserDetailsService userDetailsService;
+    
 	@Configuration
 	@EnableWebSecurity
 	public class SecurityConfig {
@@ -56,7 +51,7 @@ public class SpringSecurityConfig {
 					.exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/error_403"))
 
 					.logout((logout) -> logout.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
-					// .logout((logout) -> logout.logoutUrl("/my/success/endpoint"))
+					.logout((logout) -> logout.logoutUrl("/login"))
 
 					.rememberMe(Customizer.withDefaults());
 			;
@@ -64,29 +59,18 @@ public class SpringSecurityConfig {
 			return http.build();
 		}
 	}
-
-	@Autowired
-	private LoginSuccesHandler successHandler;
-
-	/*
-	 * @Bean public SecurityFilterChain securityFilterChain(HttpSecurity http)
-	 * throws Exception { http.authorizeHttpRequests((authorize) ->
-	 * 
-	 * authorize.requestMatchers("/", "/css/**", "/js/**", "/images/**",
-	 * "/listar").permitAll() /*
-	 * .requestMatchers("/uploads/**").hasRole("USER").requestMatchers("/ver/**").
-	 * hasRole("USER")
-	 * .requestMatchers("/factura/**").hasRole("ADMIN").requestMatchers("/form/**").
-	 * hasRole("ADMIN") .requestMatchers("/eliminar/**").hasRole("ADMIN")
-	 */
-	// .requestMatchers("/").authenticated().anyRequest().denyAll()
-	// .successHandler(successHandler)
-	// .loginPage("/login")
-	// .permitAll()
-	// );
-
-	// return http.build();
-
-	// } */
+	//public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception
+    @Autowired
+    public void userDetailsService(AuthenticationManagerBuilder build) throws Exception
+	{
+		//build.jdbcAuthentication()
+    	build.userDetailsService(userDetailsService)
+		//.dataSource(dataSource)
+		.passwordEncoder(passwordEncoder);
+		
+		//.usersByUsernameQuery("select usuario, passoword, enabled from usuarios where usuario=?")
+		//.authoritiesByUsernameQuery("select u.usuario, a.authority from authorities a inner join usuarios u on (a.user_id=u.id) where u.usuario=?");
+		
+	}
 
 }

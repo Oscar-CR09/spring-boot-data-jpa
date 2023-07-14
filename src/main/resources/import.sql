@@ -23,3 +23,11 @@ INSERT INTO facturas(descripcion,observacion, cliente_id, create_at) VALUES('Fac
 INSERT INTO facturas_items(cantidad,factura_id,producto_id) VALUES(1,1,1);
 INSERT INTO facturas_items(cantidad,factura_id,producto_id) VALUES(2,1,4);
 INSERT INTO facturas_items(cantidad,factura_id,producto_id) VALUES(1,1,5);
+
+Insert into usuarios(usuario,passoword,enabled)values('oscar','$2a$10$xAewWU/RhSl/bDb8Egf3F.gfZq6T7rmlwcg3VV7ThCF2GnHwTu6a2',1);
+Insert into usuarios(usuario,passoword,enabled)values('admin','$2a$10$BKGjzg.CmzpWb8HhagprtO06iXumMu0a6bHlQiiu5zCaNXejhVviK',1);
+
+insert into authorities(user_id,authority)values(1,'ROLE_USER');
+insert into authorities(user_id,authority)values(2,'ROLE_USER');
+insert into authorities(user_id,authority)values(2,'ROLE_ADMIN');
+
