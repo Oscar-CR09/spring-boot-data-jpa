@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 //import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+//import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 import com.examples.springboot.app.auth.handler.LoginSuccesHandler;
 import com.examples.springboot.app.models.service.JpaUserDetailsService;
@@ -50,8 +50,8 @@ public class SpringSecurityConfig {
 
 					.exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/error_403"))
 
-					.logout((logout) -> logout.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
-					.logout((logout) -> logout.logoutUrl("/login"))
+					//.logout((logout) -> logout.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
+					//.logout((logout) -> logout.logoutUrl("/","/login"))
 
 					.rememberMe(Customizer.withDefaults());
 			;
