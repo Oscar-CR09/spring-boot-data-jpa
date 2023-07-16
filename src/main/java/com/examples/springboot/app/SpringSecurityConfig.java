@@ -42,17 +42,14 @@ public class SpringSecurityConfig {
 		@Bean
 		public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 			http.authorizeHttpRequests(authorize -> authorize
-					.requestMatchers("/**", "/css/**","/js/**","/images/**","/listar/**").permitAll()
+					.requestMatchers("/", "/css/**","/js/**","/images/**","/listar","/locale").permitAll()
 					.anyRequest().authenticated())
-					.formLogin(formLogin -> formLogin.successHandler(successHandler).loginPage("/login")
-
-							.permitAll())
-
+				
 					.exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/error_403"))
-
+					.formLogin(formLogin -> formLogin.successHandler(successHandler).loginPage("/login")
 					//.logout((logout) -> logout.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
 					//.logout((logout) -> logout.logoutUrl("/","/login"))
-
+					.permitAll())
 					.rememberMe(Customizer.withDefaults());
 			;
 
@@ -63,14 +60,14 @@ public class SpringSecurityConfig {
     @Autowired
     public void userDetailsService(AuthenticationManagerBuilder build) throws Exception
 	{
-		//build.jdbcAuthentication()
-    	build.userDetailsService(userDetailsService)
-		//.dataSource(dataSource)
-		.passwordEncoder(passwordEncoder);
 		
+    	build.userDetailsService(userDetailsService)
+		.passwordEncoder(passwordEncoder);
+    	
+    	//build.jdbcAuthentication()
+    	//.dataSource(dataSource)
 		//.usersByUsernameQuery("select usuario, passoword, enabled from usuarios where usuario=?")
 		//.authoritiesByUsernameQuery("select u.usuario, a.authority from authorities a inner join usuarios u on (a.user_id=u.id) where u.usuario=?");
-		
 	}
 
 }
