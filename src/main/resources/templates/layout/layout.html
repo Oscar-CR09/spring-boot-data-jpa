@@ -14,7 +14,7 @@
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Spring Boots</a>
+				<a class="navbar-brand" th:href="@{/}">Spring Boots</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false"
@@ -51,7 +51,11 @@
 						</li>
 
 					</ul>
-				
+				<ul class="navbar-nav navbar-right mx-4">
+				<li class="nav-item mx-1"><a class="btn btn-outline-success" href="?lang=es_ES" >ES</a></li>
+				<li class="nav-item mx-1"><a class="btn btn-outline-success" href="?lang=en_US" >EN</a></li>
+				<li class="nav-item mx-1"><a class="btn btn-outline-success" href="?lang=de_DE" >DE</a></li>
+				</ul>
 			</div>
 		</nav>
 		<div class="alert alert-success" th:if="${success !=null}"
@@ -79,7 +83,7 @@
 		</p>
 		<p>
 			Este proyecto fue desarrollado en IDE Eclipse + Spring Plugins (STS
-			Spring Tool), Desarrollador Full Stack Oscar Cervantes <br /> &copy
+			Spring Tool), Desarrollador Full Stack Oscar Cervantes <br />  &copy;
 			Company 2023, Inc. Todos los derechos reservados. Términos de uso y
 			privacidad.<br />
 		</p>
