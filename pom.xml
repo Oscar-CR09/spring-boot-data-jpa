@@ -66,6 +66,12 @@
 			<artifactId>spring-boot-form</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.librepdf/openpdf -->
+		<dependency>
+			<groupId>com.github.librepdf</groupId>
+			<artifactId>openpdf</artifactId>
+			<version>1.2.12</version>
+		</dependency>
 
 
 	</dependencies>

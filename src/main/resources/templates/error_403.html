@@ -9,13 +9,13 @@
 		<div class="container py-4">
 
 			<div class="card bg-danger text-white"></div>
-			<div class="card-header">Error:acceso Denegado!</div>
+			<div class="card-header" th:text="#{text.security.error.403.titulo}">Error:acceso Denegado!</div>
 			<div class="card-body">
-				<h5 class="card-titlte">
+				<h5 class="card-titlte" th:utext="#{text.security.error.403.permiso(${#authentication.name})}">
 					Lo sentimos <span th:text="${#authentication.name}"></span>
 					No tienes permisos para acceder a este recurso.
 				</h5>
-				<a th:href="@{/listar}" class="btn btn-outline-light" role="button">
+				<a th:href="@{/listar}" class="btn btn-outline-light" role="button" th:text="#{text.security.error.403.volver}">
 					Ir al inicio</a>
 			</div>
 		</div>
