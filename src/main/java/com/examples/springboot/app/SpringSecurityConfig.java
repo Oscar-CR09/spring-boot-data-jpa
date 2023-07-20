@@ -42,7 +42,7 @@ public class SpringSecurityConfig {
 		@Bean
 		public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 			http.authorizeHttpRequests(authorize -> authorize
-					.requestMatchers("/", "/css/**","/js/**","/images/**","/listar","/locale").permitAll()
+					.requestMatchers("/", "/css/**","/js/**","/images/**","/listar**","/locale","/api/clientes/**").permitAll()
 					.anyRequest().authenticated())
 				
 					.exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/error_403"))

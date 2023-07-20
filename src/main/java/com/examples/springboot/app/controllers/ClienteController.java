@@ -3,6 +3,7 @@ package com.examples.springboot.app.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collection;
+//import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +42,7 @@ import com.examples.springboot.app.models.entity.Cliente;
 import com.examples.springboot.app.models.service.IClienteService;
 import com.examples.springboot.app.models.service.IUploadFileService;
 import com.examples.springboot.app.util.paginator.PageRender;
+import com.examples.springboot.app.view.xml.ClienteList;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -92,6 +95,15 @@ public class ClienteController {
 		return "ver";
 	}
 
+	
+	@GetMapping(value = "/listar-rest")
+	public @ResponseBody ClienteList listarRest() {
+		
+		return new ClienteList(clienteService.findAll());
+		
+	}
+	
+	
 	@RequestMapping(value = {"/listar","/"}, method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			Authentication authentication,
